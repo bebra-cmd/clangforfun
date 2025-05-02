@@ -96,7 +96,7 @@ Values Get(HashMap* table,Keys key){
             case STRING_TYPE:
             return (Values)"";
             default:
-            printf("WRONG FLAG TYPE");
+            printf("WRONG TYPE FLAG\n");
             break;
         }
         }
@@ -115,13 +115,13 @@ Values Get(HashMap* table,Keys key){
                 case STRING_TYPE:
                 return (Values)"";
                 default:
-                printf("WRONG FLAG TYPE");
+                printf("WRONG TYPE FLAG\n");
                 break;
             }
             }
         break;
         default:
-        printf("WRONG TYPE FLAG");
+        printf("WRONG TYPE FLAG\n");
         break;
     }
 
@@ -148,7 +148,7 @@ void Change(HashMap* table,Keys key,Values val){
         }
         break;
         default:
-        printf("WRONG TYPE FLAG");
+        printf("WRONG TYPE FLAG\n");
         break;
     }
 
@@ -170,7 +170,7 @@ void Delete(HashMap* table,Keys key){
         }
         break;
         default:
-        printf("WRONG TYPE FLAG");
+        printf("WRONG TYPE FLAG\n");
         break;
     }
 }
