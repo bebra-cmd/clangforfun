@@ -3,8 +3,8 @@
 #include <stdint.h>
 #include "../list/list.h"
 typedef enum DataTypesKey {
-    INT_TYPE,
-    STRING_TYPE
+    INT_TYPE_KEY,
+    STRING_TYPE_KEY
 } DataTypesKey;
 typedef union Keys{
     int integerValue;

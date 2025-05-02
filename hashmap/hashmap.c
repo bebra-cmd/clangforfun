@@ -42,14 +42,15 @@ HashMap* CreateHashMap(DataTypesKey keyType,DataTypes valuesType,int len){
     return table;
 }
 void Add(HashMap* table,Keys Key,Values Value){
+    int trueIndex;
     switch (table->KeyType){
         case INT_TYPE_KEY:
-        int trueIndex=Key.integerValue%table->Len;
+        trueIndex=Key.integerValue%table->Len;
         table->Buckets[trueIndex].Collisions=CreateList(Value,table->ValueType);
         break;
         case STRING_TYPE_KEY:
         int64_t index=HashGenerator(Key.stringValue,table->PrimeNumber);
-        int trueIndex=(int)(index%(int64_t)table->Len);
+        trueIndex=(int)(index%(int64_t)table->Len);
         table->Buckets[trueIndex].Collisions=CreateList(Value,table->ValueType);
         break;
         default:
@@ -59,15 +60,16 @@ void Add(HashMap* table,Keys Key,Values Value){
 }
 int Lookup(HashMap* table,Keys key){
     switch (table->KeyType){
+        int trueIndex;
         case INT_TYPE_KEY:
-        int trueIndex=key.integerValue%table->Len;
+        trueIndex=key.integerValue%table->Len;
         if (table->Buckets[trueIndex].Collisions!=NULL){
             return 1;
         }else {return 0;}
         break;
         case STRING_TYPE_KEY:
         int64_t index=HashGenerator(key.stringValue,table->PrimeNumber);
-        int trueIndex=(int)(index%(int64_t)table->Len);
+        trueIndex=(int)(index%(int64_t)table->Len);
         if (table->Buckets[trueIndex].Collisions!=NULL){
             return 1;
         }else {return 0;}
@@ -80,8 +82,9 @@ int Lookup(HashMap* table,Keys key){
 }
 Values Get(HashMap* table,Keys key){
     switch (table->KeyType){
+        int trueIndex;
         case INT_TYPE_KEY:
-        int trueIndex=key.integerValue%table->Len;
+        trueIndex=key.integerValue%table->Len;
         if (table->Buckets[trueIndex].Collisions!=NULL){
             return (table->Buckets[trueIndex].Collisions->Val);
         }else{
@@ -100,7 +103,7 @@ Values Get(HashMap* table,Keys key){
         break;
         case STRING_TYPE_KEY:
         int64_t index=HashGenerator(key.stringValue,table->PrimeNumber);
-        int trueIndex=(int)(index%(int64_t)table->Len);
+        trueIndex=(int)(index%(int64_t)table->Len);
         if (table->Buckets[trueIndex].Collisions!=NULL){
             return (table->Buckets[trueIndex].Collisions->Val);
         }else{
@@ -126,8 +129,9 @@ Values Get(HashMap* table,Keys key){
 }
 void Change(HashMap* table,Keys key,Values val){
     switch (table->KeyType){
+        int trueIndex;
         case INT_TYPE_KEY:
-        int trueIndex=key.integerValue%table->Len;
+        trueIndex=key.integerValue%table->Len;
         if (table->Buckets[trueIndex].Collisions!=NULL){
             table->Buckets[trueIndex].Collisions->Val=val;
         }else {
@@ -136,7 +140,7 @@ void Change(HashMap* table,Keys key,Values val){
         break;
         case STRING_TYPE_KEY:
         int64_t index=HashGenerator(key.stringValue,table->PrimeNumber);
-        int trueIndex=(int)(index%(int64_t)table->Len);
+        trueIndex=(int)(index%(int64_t)table->Len);
         if (table->Buckets[trueIndex].Collisions!=NULL){
             table->Buckets[trueIndex].Collisions->Val=val;
         }else {
@@ -151,15 +155,16 @@ void Change(HashMap* table,Keys key,Values val){
 }
 void Delete(HashMap* table,Keys key){
     switch (table->KeyType){
+        int trueIndex;
         case INT_TYPE_KEY:
-        int trueIndex=key.integerValue%table->Len;
+        trueIndex=key.integerValue%table->Len;
         if (table->Buckets[trueIndex].Collisions!=NULL){
             FreeList(table->Buckets[trueIndex].Collisions);
         }
         break;
         case STRING_TYPE_KEY:
         int64_t index=HashGenerator(key.stringValue,table->PrimeNumber);
-        int trueIndex=(int)(index%(int64_t)table->Len);
+        trueIndex=(int)(index%(int64_t)table->Len);
         if (table->Buckets[trueIndex].Collisions!=NULL){
             FreeList(table->Buckets[trueIndex].Collisions);
         }
