@@ -2,21 +2,29 @@
 #define HASHMAP_H
 #include <stdint.h>
 #include "../list/list.h"
+typedef enum DataTypesKey {
+    INT_TYPE,
+    STRING_TYPE
+} DataTypesKey;
+typedef union Keys{
+    int integerValue;
+    char* stringValue;  
+}Keys;
 typedef struct Bucket{
-    List* Collisions;
-    }Bucket;
-    typedef struct HashMap{
-       Bucket* Buckets;
-       int len;
-       int64_t PrimeNumber; //seed
-    }HashMap;
-
-    int64_t HashGenerator(const char* str,int64_t primeNumber);
-    HashMap* CreateHashMap(int len);
-    void Add(HashMap* table,const char* key, int val);
-    int Lookup(HashMap* table,const char* key);
-    int Get(HashMap* table,const char* key);
-    void Delete(HashMap* table,const char* key);
-    void PurgeHashMap(HashMap* table);
-
+List* Collisions;
+}Bucket;
+typedef struct HashMap{
+    DataTypesKey KeyType;
+    DataTypes ValueType;
+    Bucket* Buckets;
+    int Len;
+   int64_t PrimeNumber;
+}HashMap;
+HashMap* CreateHashMap(DataTypesKey keyType,DataTypes valuesType,int len);
+void Add(HashMap* table,Keys Key,Values Value);
+int Lookup(HashMap* table,Keys key);
+Values Get(HashMap* table,Keys key);
+void Change(HashMap* table,Keys key,Values val);
+void Delete(HashMap* table,Keys key);
+void PurgeHashMap(HashMap* table);
 #endif

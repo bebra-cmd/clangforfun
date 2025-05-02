@@ -1,21 +1,26 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <time.h>
+union ValueInputs{
+    int integerValue;
+    float floatValue;
+    char* stringValue;  
+  };
 typedef struct Tree{
-int Val;
+union ValueInputs* Val;
 struct Tree* Left;
 struct Tree* Right;
 }Tree;
 
-Tree* NewTree(int Val){
+Tree* NewTree(union ValueInputs* Val){
     Tree* head=(Tree*)malloc(sizeof(Tree));
     head->Val=Val;
     head->Left=NULL;
     head->Right=NULL;
     return head;
 }
-void BinarySearchInsertion(int Val,Tree* head){
+void BinarySearchInsertion(union ValueInputs* Val,Tree* head){
     if (head==NULL){return;}
+    //refactor logic here according to input values better idea allocate variable and compare
     if (head->Val>Val){
         if (head->Left==NULL){
         head->Left=NewTree(Val);
